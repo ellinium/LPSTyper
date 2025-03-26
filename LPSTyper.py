@@ -114,16 +114,13 @@ def identify_LPS(filename):
 def main():
 	fasta_dir = get_dir()
 
-	files2process = list()
-	valid_extensions = {'.FASTA', '.fasta', '.fna', '.FNA'}
-	exclude_keyword = 'cds_from_genomic'
+	valid_extensions = {'.fasta', '.fna', '.fa'}
 
 	files2process = [
 		os.path.join(dirpath, file)
 		for dirpath, _, filenames in os.walk(fasta_dir)
 		for file in filenames
-		if any(file.endswith(ext) for ext in valid_extensions)
-		   and exclude_keyword not in file
+		if any((file.lower().endswith(ext)) for ext in valid_extensions)
 	]
 
 	if len(files2process) == 0:
@@ -144,7 +141,7 @@ def main():
 		writer = csv.writer(file, delimiter=',')
 		writer.writerows(results_lst)
 
-	print("The results are saved to LPSTyper_results.csv")
+	print("The results are saved to " + fasta_dir + "/LPSTyper_results.csv")
 
 
 # Search forward and reverse primers in a file or contig
