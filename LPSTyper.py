@@ -114,7 +114,7 @@ def identify_LPS(filename):
 def main():
 	fasta_dir = get_dir()
 
-	valid_extensions = {'.fasta', '.fna', '.fa'}
+	valid_extensions = {'.fasta', '.fna', '.fa', 'fsa_nt'}
 
 	files2process = [
 		os.path.join(dirpath, file)
